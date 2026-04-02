@@ -1,0 +1,44 @@
+[
+  {
+    "internship": {
+      "job_title": "SMID THE MOBILISATION OF URBAN POOR HOUSEHOLDS TO FORM THEIR OWN INSTITUTIONS IS AN IMPORTANT INVESTMENT FOR AN EFFECTIVE AND SUSTAINABLE POVERTY REDUCTION PROGRAMME AS ENVISAGED BY THE NATIONAL URBAN LIVELIHOODS MISSION.",
+      "company_name": "TOWN MUNICIPAL COUNCIL CHIKKABANAVARA",
+      "city": "Bangalore",
+      "job_type": "Full Time"
+    },
+    "applicant": {
+      "name": "kajal",
+      "city": "Bangalore",
+      "education": "Undergraduate",
+      "skills": [
+        "IT & E-Governance",
+        "data analysis"
+      ],
+      "projects": []
+    },
+    "appliedAt": "2026-02-08T02:41:48.605Z",
+    "id": "59ba6d0c-4794-47a6-91fd-d00c8d672088",
+    "receivedAt": "2026-02-08T02:41:48.633836Z"
+  },
+  {
+    "internship": {
+      "job_title": "SBM-U TULIP INTERNSHIPS",
+      "company_name": "Nagar Panchayat Rajpur",
+      "city": "Kanpur Dehat",
+      "job_type": "Full Time"
+    },
+    "applicant": {
+      "name": "kajal",
+      "city": "Kanpur",
+      "education": "Bachelor's (3rd Year)",
+      "skills": [
+        "IT & E-Governance",
+        "Civil Engineering"
+      ],
+      "projects": []
+    },
+    "appliedAt": "2026-02-07T15:50:44.391Z",
+    "id": "c541d382-fef5-4c47-8b6e-0697e75013d8",
+    "receivedAt": "2026-02-07T15:50:44.406431Z"
+  }
+]

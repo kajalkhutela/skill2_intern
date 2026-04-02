@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill2Intern - Find Your Perfect Internship</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1e40af 0%, #374151 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 1300px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      height: 100vh;
+      max-height: calc(100vh - 60px);
+      transition: all 0.4s ease;
+    }
+    
+    .login-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .left-section {
+      flex: 1;
+      background: linear-gradient(135deg, #1e40af 0%, #374151 100%);
+      color: white;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+      transition: all 0.4s ease;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #fff 0%, #ddd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .left-section h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .left-section p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .features-list {
+      list-style: none;
+    }
+
+    .features-list li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .features-list li:before {
+      content: "✓";
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 24px;
+      margin-right: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .right-section {
+      flex: 1;
+      padding: 40px 35px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto;
+      background: white;
+    }
+
+    .right-section h1 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      justify-content: space-between;
+      background: #f0f2f5;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .progress-step {
+      flex: 1;
+      height: 6px;
+      background: #d1d5db;
+      border-radius: 3px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-step.active {
+      background: linear-gradient(90deg, #1e40af, #374151);
+      box-shadow: 0 0 8px rgba(30, 64, 175, 0.4);
+    }
+
+    .progress-step.active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    #profileForm {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .skill-checkbox {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .skill-checkbox:hover {
+      border-color: #667eea;
+      background: #f8f9ff;
+    }
+
+    .skill-checkbox input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #667eea;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .skill-checkbox label {
+      margin: 0;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .skill-checkbox input:checked + label {
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .skill-checkbox.selected {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      border-color: #667eea;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+    }
+
+    .error-message {
+      color: #dc2626;
+      font-size: 11px;
+      margin-top: 4px;
+      display: none;
+      background: #fee2e2;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border-left: 4px solid #dc2626;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .skill-summary {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-section {
+        padding: 40px 30px;
+      }
+
+      .right-section {
+        padding: 40px 30px;
+      }
+
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+
+      .left-section h2 {
+        font-size: 24px;
+      }
+
+      .right-section h1 {
+        font-size: 20px;
+      }
+    }
+/* Resume upload styles (copied from resume-upload.html) */
+
+.upload-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.upload-tabs button {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #666;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.upload-tabs button.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+}
+
+.upload-tabs button:hover { color: #667eea; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.resume-upload-section { background: #fafbfc; padding: 20px; border-radius: 10px; border: 2px dashed #667eea; text-align: center; cursor: pointer; transition: all 0.3s ease; }
+.resume-upload-section:hover { background: #f0f4f8; border-color: #764ba2; }
+.resume-upload-section.dragover { background: #e8ecf7; border-color: #764ba2; }
+.upload-icon { font-size: 40px; margin-bottom: 10px; }
+.upload-text { font-size: 14px; color: #333; font-weight: 600; margin-bottom: 5px; }
+.upload-subtext { font-size: 12px; color: #666; }
+.upload-input { display: none; }
+.extracted-skills { margin-top: 20px; background: white; padding: 16px; border-radius: 8px; display: none; }
+.extracted-skills.show { display: block; }
+.extracted-skills h4 { font-weight: 600; color: #333; margin-bottom: 12px; font-size: 14px; }
+.skills-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.skill-tag { background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border: 1px solid #667eea; padding: 6px 12px; border-radius: 20px; font-size: 12px; color: #667eea; font-weight: 600; }
+.skill-count { font-size: 13px; color: #666; margin-bottom: 12px; }
+.progress-bar-container { margin: 12px 0; display: none; }
+.progress-bar-container.show { display: block; }
+.progress-bar { height: 4px; background: #e0e0e0; border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); width: 0%; transition: width 0.3s ease; }
+.use-uploaded-skills { background: #f0f4f8; padding: 12px; border-radius: 6px; text-align: center; margin-top: 12px; display: none; }
+.use-uploaded-skills.show { display: block; }
+.use-uploaded-skills button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; margin: 4px; transition: all 0.3s ease; }
+.use-uploaded-skills button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+.error-message-upload { background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 6px; margin-top: 12px; display: none; font-size: 12px; }
+.error-message-upload.show { display: block; }
+.success-message-upload { background: #dcfce7; color: #16a34a; padding: 12px; border-radius: 6px; margin-top: 12px; display: none; font-size: 12px; }
+.success-message-upload.show { display: block; }
+
+/* ===== DARK MODE LOGIN ===== */
+
+body.dark {
+  background: #0f172a !important;
+  color: #e5e7eb;
+}
+
+body.dark .container {
+  background: #1e293b !important;
+}
+
+body.dark .login-container {
+  background: #1e293b !important;
+}
+
+body.dark .right-section {
+  background: #1e293b !important;
+  color: #e5e7eb;
+}
+
+body.dark input,
+body.dark select {
+  background: #0f172a !important;
+  color: white !important;
+  border-color: #334155 !important;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark p,
+body.dark label {
+  color: #e5e7eb !important;
+}
+
+  </style>
+</head>
+<body>
+  <button id="themeToggle" type="button" style="
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 14px;
+  font-size: 18px;
+  cursor: pointer;
+">🌙</button>
+
+  <div class="login-section">
+  <div class="login-container">
+    <!-- Left Section -->
+    <div class="left-section">
+      <div class="logo">🎓 Skill2Intern</div>
+      <h2>Find Your Perfect Internship Match</h2>
+      <p>Get personalized internship recommendations based on your skills and location. Start your career journey today!</p>
+      
+      <ul class="features-list">
+        <li>Smart skill-based matching</li>
+        <li>2,200+ internship opportunities</li>
+        <li>50+ cities across India</li>
+        <li>Real-time recommendations</li>
+      </ul>
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+      <h1>Create Your Profile</h1>
+      <p class="subtitle">Tell us about yourself to get started</p>
+
+      <div class="upload-tabs">
+         <button class="tab-btn active" data-tab="manual">📝 Profile Setup</button>
+      </div>
+
+      <div class="form-progress">
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+      </div>
+
+      <div id="manual" class="tab-content active">
+
+      <form id="profileForm">
+        <div class="form-group">
+          <label for="name">👤 Full Name <span style="color: #4f46e5; font-size: 18px;">*</span></label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="city">📍 City <span style="color: #4f46e5; font-size: 18px;">*</span></label>
+          <select id="city" required style="width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; transition: all 0.3s ease; font-family: inherit;">
+            <option value="">-- Select Your City --</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Pune">Pune</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Surat">Surat</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Kanpur">Kanpur</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Indore">Indore</option>
+            <option value="Thane">Thane</option>
+            <option value="Bhopal">Bhopal</option>
+            <option value="Visakhapatnam">Visakhapatnam</option>
+            <option value="Vadodara">Vadodara</option>
+            <option value="Ghaziabad">Ghaziabad</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="education">🎓 Education Level <span style="color: #4f46e5; font-size: 18px;">*</span></label>
+          <select id="education" required style="width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; transition: all 0.3s ease; font-family: inherit;">
+            <option value="">-- Select Education Level --</option>
+            <option value="12th Pass">12th Pass</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Bachelor's Degree">Bachelor's Degree</option>
+            <option value="Master's Degree">Master's Degree</option>
+            <option value="Postgraduate">Postgraduate</option>
+            <option value="PhD">PhD</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Associate Degree">Associate Degree</option>
+            <option value="Vocational Training">Vocational Training</option>
+           
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="jobType">💼 Preferred Job Type <span style="color: #4f46e5; font-size: 18px;">*</span></label>
+          <select id="jobType" required style="width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; transition: all 0.3s ease; font-family: inherit;">
+            <option value="">-- Select Job Type --</option>
+            <option value="Full Time">💼 Full Time</option>
+            <option value="Part Time">⏰ Part Time</option>
+            <option value="Virtual Internship">🌐 Virtual Internship</option>
+          </select>
+        </div>
+        <!-- <label for="skillsinput">Enter Your Skills</label>
+        <input type="text" id="skillsInput" placeholder="Type a skill and press Enter (e.g., Python, Data Analysis)" style="width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; transition: all 0.3s ease; font-family: inherit; margin-bottom: 12px;">
+        <div class="form-group"> -->
+          <label>⚡ Choose Your Domains <span style="color: #4f46e5; font-size: 18px;">*</span></label>
+          <p style="font-size: 13px; color: #6b7280; margin-top: -4px;">Choose at least 1 domain that matches your interests</p>
+          <div class="skills-container">
+            <div class="skill-checkbox">
+              <input type="checkbox" id="skill_it" name="skills" value="IT & E-Governance">
+              <label for="skill_it">💻 IT & E-Governance</label>
+            </div>
+            <div class="skill-checkbox">
+              <input type="checkbox" id="skill_finance" name="skills" value="Finance & Accounting">
+              <label for="skill_finance">💰 Finance & Accounting</label>
+            </div>
+            <div class="skill-checkbox">
+              <input type="checkbox" id="skill_urban" name="skills" value="Urban Planning">
+              <label for="skill_urban">🏙️ Urban Planning</label>
+            </div>
+            <div class="skill-checkbox">
+              <input type="checkbox" id="skill_water" name="skills" value="Water & Waste Management">
+              <label for="skill_water">💧 Water & Waste Mgmt</label>
+            </div>
+            <div class="skill-checkbox">
+              <input type="checkbox" id="skill_civil" name="skills" value="Civil Engineering">
+              <label for="skill_civil">🏗️ Civil Engineering</label>
+            </div>
+            <div class="skill-checkbox">
+              <input type="checkbox" id="skill_management" name="skills" value="Management">
+              <label for="skill_management">📊 Management</label>
+            </div>
+            <div class="skill-checkbox">
+              <input type="checkbox" id="skill_social" name="skills" value="Social Development">
+              <label for="skill_social">👥 Social Development</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="skills">⚡ Select Your Skills <span style="color: #4f46e5; font-size: 18px;">*</span></label>
+            <p style="font-size: 13px; color: #6b7280; margin-top: -4px;">Type skills and press Enter to add them (autocomplete available)</p>
+            <input type="text" id="skillsInput" placeholder="e.g., Python, Machine Learning, Data Analysis"
+                   style="width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 14px; transition: all 0.3s ease; font-family: inherit;">
+            <datalist id="skillsList"></datalist>
+            <div id="selectedSkills" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;"></div>
+          </div>
+          <div class="error-message" id="skillsError">Please select at least one skill</div>
+        </div>
+
+        <!-- Skill Summary Section -->
+        <div class="skill-summary" id="skillSummary" style="display: none; margin-top: 20px; padding: 16px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #1e40af;">
+          <h4 style="margin-bottom: 12px; color: #1e40af; font-weight: 600;">📋 Selected Domains Summary</h4>
+          <div id="summaryContent" style="font-size: 14px; color: #374151;"></div>
+        </div>
+
+        <button type="submit" class="submit-btn">🚀 Get Personalized Recommendations</button>
+      </form>
+
+      </div> <!-- end manual tab -->
+
+      <div id="resume" class="tab-content">
+        <div class="resume-upload-section" id="uploadArea">
+          <div class="upload-icon">📄</div>
+          <div class="upload-text">Upload Your Resume (PDF)</div>
+          <div class="upload-subtext">Drag & drop or click to browse</div>
+          <input type="file" id="resumeInput" accept=".pdf" class="upload-input" />
+        </div>
+
+        <div class="progress-bar-container" id="progressContainer">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="error-message-upload" id="uploadError"></div>
+        <div class="success-message-upload" id="uploadSuccess"></div>
+
+        <div class="extracted-skills" id="extractedSkills">
+          <h4>🎯 Extracted Skills</h4>
+          <div class="skill-count">
+            Found <strong id="extractedCount">0</strong> technical skills in your resume
+          </div>
+          <div class="skills-preview" id="skillsList"></div>
+          <div class="use-uploaded-skills" id="useSkillsSection">
+            <button id="useExtractedBtn">✓ Use These Skills</button>
+            <button id="continueManualBtn">✎ Edit & Continue</button>
+          </div>
+        </div>
+      </div> <!-- end resume tab -->
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+  <script src="js/resume-parser.js"></script>
+  
+  <script src="theme.js"></script>
+
+</body>
+</html>

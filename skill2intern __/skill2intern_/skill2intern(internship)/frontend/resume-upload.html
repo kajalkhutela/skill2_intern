@@ -1,0 +1,246 @@
+<!-- Resume Upload Section - Tab 2 in login form -->
+
+<style>
+  .upload-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  .upload-tabs button {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #666;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+  }
+
+  .upload-tabs button.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+  }
+
+  .upload-tabs button:hover {
+    color: #667eea;
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .resume-upload-section {
+    background: #fafbfc;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #667eea;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .resume-upload-section:hover {
+    background: #f0f4f8;
+    border-color: #764ba2;
+  }
+
+  .resume-upload-section.dragover {
+    background: #e8ecf7;
+    border-color: #764ba2;
+  }
+
+  .upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+
+  .upload-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .upload-subtext {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .upload-input {
+    display: none;
+  }
+
+  .extracted-skills {
+    margin-top: 20px;
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    display: none;
+  }
+
+  .extracted-skills.show {
+    display: block;
+  }
+
+  .extracted-skills h4 {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .skills-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .skill-tag {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border: 1px solid #667eea;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #667eea;
+    font-weight: 600;
+  }
+
+  .skill-count {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .progress-bar-container {
+    margin: 12px 0;
+    display: none;
+  }
+
+  .progress-bar-container.show {
+    display: block;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .use-uploaded-skills {
+    background: #f0f4f8;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 12px;
+    display: none;
+  }
+
+  .use-uploaded-skills.show {
+    display: block;
+  }
+
+  .use-uploaded-skills button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .use-uploaded-skills button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+
+  .error-message-upload {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+    display: none;
+    font-size: 12px;
+  }
+
+  .error-message-upload.show {
+    display: block;
+  }
+
+  .success-message-upload {
+    background: #dcfce7;
+    color: #16a34a;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+    display: none;
+    font-size: 12px;
+  }
+
+  .success-message-upload.show {
+    display: block;
+  }
+</style>
+
+<!-- Tab Buttons -->
+<div class="upload-tabs">
+  <button class="tab-btn active" data-tab="manual">📝 Manual Input</button>
+  <button class="tab-btn" data-tab="resume">📄 Upload Resume (AI)</button>
+</div>
+
+<!-- Manual Input Tab -->
+<div id="manual" class="tab-content active">
+  <!-- (This is the original form - will be here) -->
+</div>
+
+<!-- Resume Upload Tab -->
+<div id="resume" class="tab-content">
+  <div class="resume-upload-section" id="uploadArea">
+    <div class="upload-icon">📄</div>
+    <div class="upload-text">Upload Your Resume (PDF)</div>
+    <div class="upload-subtext">Drag & drop or click to browse</div>
+    <input type="file" id="resumeInput" accept=".pdf" class="upload-input" />
+  </div>
+
+  <div class="progress-bar-container" id="progressContainer">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="error-message-upload" id="uploadError"></div>
+  <div class="success-message-upload" id="uploadSuccess"></div>
+
+  <div class="extracted-skills" id="extractedSkills">
+    <h4>🎯 Extracted Skills</h4>
+    <div class="skill-count">
+      Found <strong id="extractedCount">0</strong> technical skills in your resume
+    </div>
+    <div class="skills-preview" id="skillsList"></div>
+    <div class="use-uploaded-skills" id="useSkillsSection">
+      <button id="useExtractedBtn">✓ Use These Skills</button>
+      <button id="continueManualBtn">✎ Edit & Continue</button>
+    </div>
+  </div>
+</div>

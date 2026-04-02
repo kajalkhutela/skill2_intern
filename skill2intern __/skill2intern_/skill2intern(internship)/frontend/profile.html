@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Skill2Intern</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .header button {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .header button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .profile-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 40px 30px;
+      text-align: center;
+      color: white;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      background: rgba(255,255,255,0.2);
+      border: 3px solid white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin: 0 auto 20px;
+    }
+
+    .profile-header h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .profile-header p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .profile-content {
+      padding: 30px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .profile-field {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field-label {
+      font-weight: 600;
+      color: #667eea;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .field-value {
+      font-size: 15px;
+      color: #333;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+      border: 2px solid #ddd;
+    }
+
+    .btn-secondary:hover {
+      background: #e8e8e8;
+      transform: translateY(-2px);
+    }
+
+    .edit-mode .field-value input,
+    .edit-mode .field-value select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .profile-meta {
+      text-align: center;
+      color: #999;
+      font-size: 12px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .back-link {
+      color: white;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .back-link:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>👤 My Profile</h1>
+      <button onclick="goBack()">← Back</button>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="avatar" id="profileAvatar">👤</div>
+        <h2 id="profileName">Student Name</h2>
+        <p id="profileMemberSince">Member since -</p>
+      </div>
+
+      <div class="profile-content">
+        <div class="section">
+          <div class="section-title">📋 Personal Information</div>
+          
+          <div class="profile-field">
+            <span class="field-label">Full Name</span>
+            <span class="field-value" id="fieldName">-</span>
+          </div>
+
+          <div class="profile-field">
+            <span class="field-label">📍 City</span>
+            <span class="field-value" id="fieldCity">-</span>
+          </div>
+
+          <div class="profile-field">
+            <span class="field-label">🏘️ Education Level</span>
+            <span class="field-value" id="fieldEducation">-</span>
+          </div>
+
+          <div class="profile-field">
+            <span class="field-label">💼 Preferred Job Type</span>
+            <span class="field-value" id="fieldJobType">-</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">⭐ Skills & Interests</div>
+          <div class="skills-container" id="skillsContainer">
+            <span class="skill-tag">No skills selected yet</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">💼 Projects (Portfolio)</div>
+          <div id="projectsContainer" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="color: #999; font-size: 13px;">No projects added yet.</div>
+          </div>
+          <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+            <input id="projTitle" placeholder="Project title" style="padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;">
+            <input id="projUrl" placeholder="Project URL (https://...)" style="padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;">
+            <input id="projDesc" placeholder="Short description (optional)" style="padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;">
+            <div style="display:flex; gap:8px;"><button class="btn btn-primary" id="addProjectBtn">➕ Add Project</button><button class="btn btn-secondary" id="clearProjectsBtn">🗑️ Clear All</button></div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-primary" onclick="editProfile()">✏️ Edit Profile</button>
+          <button class="btn btn-secondary" onclick="logout()">🚪 Logout</button>
+        </div>
+
+        <div class="profile-meta">
+          <p>Profile created on <span id="createdDate">-</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load profile from localStorage
+    const profile = JSON.parse(localStorage.getItem("studentProfile"));
+    let projects = JSON.parse(localStorage.getItem("projects") || "[]");
+
+    if (!profile) {
+      window.location.href = "login.html";
+    } else {
+      // Update profile display
+      const firstInitial = (profile.name || "S").charAt(0).toUpperCase();
+      document.getElementById("profileAvatar").innerText = firstInitial;
+      document.getElementById("profileName").innerText = profile.name || "Student";
+      document.getElementById("fieldName").innerText = profile.name || "-";
+      document.getElementById("fieldCity").innerText = profile.city || "-";
+      document.getElementById("fieldEducation").innerText = profile.education || "-";
+      document.getElementById("fieldJobType").innerText = profile.jobType || "-";
+
+      // Format created date
+      if (profile.createdAt) {
+        const date = new Date(profile.createdAt);
+        const formatted = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById("createdDate").innerText = formatted;
+        document.getElementById("profileMemberSince").innerText = `Member since ${formatted}`;
+      }
+
+      // Display skills
+      if (profile.skills && profile.skills.length > 0) {
+        const skillsHtml = profile.skills.map(skill => `<span class="skill-tag">⭐ ${skill}</span>`).join("");
+        document.getElementById("skillsContainer").innerHTML = skillsHtml;
+      }
+
+      // Display projects
+      function renderProjects() {
+        const container = document.getElementById('projectsContainer');
+        if (!container) return;
+        if (!projects || projects.length === 0) {
+          container.innerHTML = '<div style="color:#999; font-size:13px">No projects added yet.</div>';
+          return;
+        }
+        container.innerHTML = '';
+        projects.forEach((p, idx) => {
+          const el = document.createElement('div');
+          el.style = 'background:#fff;padding:10px;border-radius:8px;border:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:12px;';
+          el.innerHTML = `<div style="flex:1"><div style="font-weight:600">${p.title}</div><div style="font-size:13px;color:#555">${p.description || ''}</div><a href="${p.url}" target="_blank" style="font-size:13px;color:#667eea">Open Project</a></div><div><button class="btn btn-secondary" data-idx="${idx}" style="padding:8px 10px">Remove</button></div>`;
+          container.appendChild(el);
+        });
+
+        // attach remove handlers
+        container.querySelectorAll('button[data-idx]').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const i = parseInt(this.dataset.idx);
+            projects.splice(i, 1);
+            localStorage.setItem('projects', JSON.stringify(projects));
+            renderProjects();
+          });
+        });
+      }
+
+      renderProjects();
+
+      // Add project button
+      document.getElementById('addProjectBtn')?.addEventListener('click', function() {
+        const title = document.getElementById('projTitle').value.trim();
+        const url = document.getElementById('projUrl').value.trim();
+        const desc = document.getElementById('projDesc').value.trim();
+        if (!title || !url) {
+          alert('Please provide at least a project title and URL.');
+          return;
+        }
+        const newProj = { title: title, url: url, description: desc };
+        // Try to POST to server; fallback to localStorage
+        fetch('/api/projects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newProj)
+        }).then(r => {
+          if (r.ok) return r.json();
+          throw new Error('Server error');
+        }).then(created => {
+          projects.unshift(created);
+          localStorage.setItem('projects', JSON.stringify(projects));
+          document.getElementById('projTitle').value = '';
+          document.getElementById('projUrl').value = '';
+          document.getElementById('projDesc').value = '';
+          renderProjects();
+        }).catch(err => {
+          // Fallback: save locally
+          projects.unshift(Object.assign({ addedAt: new Date().toISOString() }, newProj));
+          localStorage.setItem('projects', JSON.stringify(projects));
+          document.getElementById('projTitle').value = '';
+          document.getElementById('projUrl').value = '';
+          document.getElementById('projDesc').value = '';
+          renderProjects();
+        });
+      });
+
+      document.getElementById('clearProjectsBtn')?.addEventListener('click', function() {
+        if (!confirm('Clear all projects?')) return;
+        projects = [];
+        localStorage.removeItem('projects');
+        renderProjects();
+      });
+    }
+
+    function goBack() {
+      window.location.href = "dashboard.html";
+    }
+
+    function editProfile() {
+      alert("Edit profile feature coming soon! You can update your profile by logging out and creating a new one.");
+    }
+
+    function logout() {
+      if (confirm("Are you sure you want to logout?")) {
+        localStorage.removeItem("studentProfile");
+        window.location.href = "login.html";
+      }
+    }
+  </script>
+
+  <script src="theme.js"></script>
+
+</body>
+</html>
